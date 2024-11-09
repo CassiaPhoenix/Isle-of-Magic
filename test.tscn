@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgf2hfv8lffy8"]
+
+[ext_resource type="PackedScene" uid="uid://dd6x30gfrljtn" path="res://player.tscn" id="1_nq857"]
+[ext_resource type="Texture2D" uid="uid://c2je32pvldhd3" path="res://texture_07.png" id="1_u7xak"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7fkmd"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_l1ibc"]
+sky_material = SubResource("ProceduralSkyMaterial_7fkmd")
+
+[sub_resource type="Environment" id="Environment_4ng6x"]
+background_mode = 2
+sky = SubResource("Sky_l1ibc")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p7c8l"]
+albedo_color = Color(0.894638, 0.376151, 0.580375, 1)
+albedo_texture = ExtResource("1_u7xak")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ka6u0"]
+material = SubResource("StandardMaterial3D_p7c8l")
+size = Vector2(10, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_b6lxj"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="root" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4ng6x")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ka6u0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_b6lxj")
+
+[node name="Player" parent="." instance=ExtResource("1_nq857")]
+speed = 3.0

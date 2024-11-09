@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://bgf2hfv8lffy8"]
+
+[ext_resource type="Script" path="res://Controller.gd" id="1_u2ced"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7fkmd"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_l1ibc"]
+sky_material = SubResource("ProceduralSkyMaterial_7fkmd")
+
+[sub_resource type="Environment" id="Environment_4ng6x"]
+background_mode = 2
+sky = SubResource("Sky_l1ibc")
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ka6u0"]
+size = Vector2(10, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_b6lxj"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sfxwy"]
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mkx4t"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b8ftr"]
+
+[node name="root" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4ng6x")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ka6u0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_b6lxj")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+script = ExtResource("1_u2ced")
+
+[node name="DirectionalMesh" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0432653, 0.323302)
+mesh = SubResource("CapsuleMesh_sfxwy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_mkx4t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_b8ftr")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(2, 0, 0, 0, 1.41421, 1.41421, 0, -1.41421, 1.41421, 0, 5, 6)
+projection = 1
+size = 2.524
