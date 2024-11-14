@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgf2hfv8lffy8"]
+[gd_scene load_steps=10 format=3 uid="uid://bgf2hfv8lffy8"]
 
+[ext_resource type="PackedScene" uid="uid://4u4wv7ld7tln" path="res://ui.tscn" id="1_aic34"]
 [ext_resource type="PackedScene" uid="uid://dd6x30gfrljtn" path="res://player.tscn" id="1_nq857"]
 [ext_resource type="Texture2D" uid="uid://c2je32pvldhd3" path="res://texture_07.png" id="1_u7xak"]
 
@@ -34,6 +35,8 @@ data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4ng6x")
+
+[node name="UI" parent="." instance=ExtResource("1_aic34")]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_ka6u0")

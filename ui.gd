@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-@onready var background = $Background
-@onready var drawGrid = $"Background/Draw Grid"
+@onready var slab = $Slab
+@onready var drawGrid = $"Slab/Draw Grid"
 var visiblePos
 var hidePos
 var spriteOffset
@@ -17,11 +17,9 @@ func _ready():
 	last_size = DisplayServer.window_get_size()
 	main_window_size_changed.connect(_on_main_window_size_changed)
 	
-	spriteOffset = background.position
-	background.position = Vector2.ZERO
-	background.offset = spriteOffset
-	visiblePos = background.position
-	hidePos = Vector2(-100, -100)
+	
+	spriteOffset = $"Slab/Grid Marker".position
+	setSlabPos()
 	
 	drawGrid.setup(spriteOffset)
 
@@ -32,7 +30,12 @@ func _physics_process(_delta):
 		main_window_size_changed.emit()
 	
 func _on_main_window_size_changed():
+	setSlabPos()
 	print("Window size changed: " + str(last_size)) 
+
+func setSlabPos():
+	visiblePos = Vector2.ZERO
+	hidePos = Vector2(last_size.x + 500, 0)
 
 func _input(event):
 	if event.is_action_pressed("rightclick"):
@@ -44,8 +47,8 @@ func _input(event):
 			pos = visiblePos
 		var tween = create_tween()
 		if !hideState:
-			tween.tween_property(background, "modulate:a", 1, 0)
-		tween.tween_property(background, "position", pos, .3)
+			tween.tween_property(slab, "modulate:a", 1, 0)
+		tween.tween_property(slab, "position", pos, .3)
 		if hideState:
-			tween.tween_property(background, "modulate:a", 0, 0)
+			tween.tween_property(slab, "modulate:a", 0, 0)
 		

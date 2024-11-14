@@ -50,7 +50,7 @@ func setup(offset):
 			coord.y = dotFirst.y + (y_space * c) + offset.y
 			var dot = dotResourse.instantiate()
 			add_child(dot)
-			dot._setup(id, coord.x, coord.y, dotRadius, dotColour)
+			dot._setup(id, coord.x, coord.y, dotRadius, dotColour, dotColliderBuffer)
 			dot.mouse_enter.connect(_on_dot_mouse_enter)
 			dot.mouse_leave.connect(_on_dot_mouse_leave)
 			dotNodes[id] = coord
@@ -65,7 +65,8 @@ func _draw():
 		drawPath(-1)
 		highlightDot(-1)
 		for i in selectedNodes.size() - 1:
-			drawPath(i, i+1)
+			if isAdjacent(i, i+1):
+				drawPath(i, i+1)
 			highlightDot(i)
 
 func highlightDot(id):
@@ -79,6 +80,17 @@ func drawPath(start_id, end_id = null):
 	else:
 		end = dotNodes[selectedNodes[end_id]]
 	draw_line(start, end, pathColour, pathThickness)
+	
+func isAdjacent(start_id, end_id):
+	var start = dotNodes[selectedNodes[start_id]]
+	var end = dotNodes[selectedNodes[end_id]]
+	
+	var withinX = abs(start.x - end.x) <= (dotLast.x - dotFirst.x) / (dotRows - 1)
+	var withinY = abs(start.y - end.y) <= (dotLast.y - dotFirst.y) / (dotColumns - 1)
+	
+	if withinX && withinY:
+		return true
+	return false
 
 func _input(event):
 	if event.is_action_pressed("click"): 

@@ -10,20 +10,22 @@ signal mouse_leave(id:int)
 @export var y = 0.0
 @export var r = 0.0
 @export var c = Color(1,1,1)
+@export var b = 0
 
 func _ready():
 	position = Vector2(x,y)
-	$CollisionShape2D.shape.radius = r + 25
+	$CollisionShape2D.shape.radius = r + b
 	if drawOnReady:
 		queue_redraw()
 		
 
-func _setup(i, pos_x, pos_y, rad, col):
+func _setup(i, pos_x, pos_y, rad, col, buff):
 	id = i
 	x = pos_x
 	y = pos_y
 	r = rad
 	c = col
+	b = buff
 	_ready()
 
 func _draw():

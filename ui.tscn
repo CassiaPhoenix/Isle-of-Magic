@@ -1,24 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://4u4wv7ld7tln"]
+[gd_scene load_steps=7 format=3 uid="uid://4u4wv7ld7tln"]
 
 [ext_resource type="Script" path="res://ui.gd" id="1_q4gdy"]
 [ext_resource type="Script" path="res://drawGrid.gd" id="2_2mrs0"]
-[ext_resource type="Texture2D" uid="uid://7fkiao5ck5ad" path="res://icon.svg" id="3_afw4a"]
+[ext_resource type="Texture2D" uid="uid://cukrhtn0p280b" path="res://slab.png" id="2_ypagk"]
+[ext_resource type="Texture2D" uid="uid://bv7h3qhutyrh8" path="res://slab_n.png" id="3_nplx3"]
+[ext_resource type="Texture2D" uid="uid://ohyq365neh8k" path="res://slab_s.png" id="4_h66fa"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_uatfk"]
+diffuse_texture = ExtResource("2_ypagk")
+normal_texture = ExtResource("3_nplx3")
+specular_texture = ExtResource("4_h66fa")
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_q4gdy")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(831, 314)
-texture = ExtResource("3_afw4a")
+[node name="Slab" type="Node2D" parent="."]
 
-[node name="Draw Grid" type="Node2D" parent="Background"]
+[node name="Background" type="Sprite2D" parent="Slab"]
+position = Vector2(1079, 335)
+scale = Vector2(0.552422, 0.582733)
+texture = SubResource("CanvasTexture_uatfk")
+offset = Vector2(14, 13)
+
+[node name="Draw Grid" type="Node2D" parent="Slab"]
 script = ExtResource("2_2mrs0")
-dotFirst = Vector2(-150, -150)
-dotLast = Vector2(150, 150)
+dotFirst = Vector2(-170, -182)
+dotLast = Vector2(170, 178)
 dotRows = 3
 dotColumns = 3
 dotRadius = 20.0
 dotColliderBuffer = 20.0
-dotColour = Color(1, 1, 1, 1)
+dotColour = Color(1, 1, 1, 0)
 pathThickness = 2
 pathColour = Color(1, 0, 1, 1)
+
+[node name="Grid Marker" type="Marker2D" parent="Slab"]
+position = Vector2(1077, 335)
