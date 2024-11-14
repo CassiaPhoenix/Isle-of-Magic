@@ -1,6 +1,14 @@
 # Isle of Magic
 Submission for Game Off 2024 - https://itch.io/jam/game-off-2024
 
+## Description:
+
+To be added...
+
+## Controls:
+
+Too be added...
+
 ## Credits (so far):
 
 Textures.com:
