@@ -9,20 +9,18 @@ To be added...
 
 Too be added...
 
-## Credits (so far):
+## Credits:
+### Developers:
+- Cassia Phoenix - https://github.com/CassiaPhoenix/ - https://cassiaphoenix.itch.io/
 
-Textures.com:
+### Assets Used (so far):
 
 - Free 3D Scanned Stone Wall - https://www.textures.com/download/free-3d-scanned-stone-wall-2x2-3x3-4x4-meters/133264
 
-Kenney: 
-
 - Prototype Textures - https://kenney.nl/assets/prototype-textures
-
-
-metanoia83: 
 
 - Godot-4.0-Motion-Trail - https://github.com/metanoia83/Godot-4.0-Motion-Trail
 
-All The Rest:
-- Cassia Phoenix - https://github.com/CassiaPhoenix/ - https://cassiaphoenix.itch.io/
+- uniformclouds.jpg - https://jwhigham.wordpress.com/2010/05/21/clouding-the-issue/
+
+
